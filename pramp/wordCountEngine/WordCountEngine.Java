@@ -2,52 +2,50 @@ package Test;
 
 import java.util.*;
 
-public class Test {
-   
+public class Test{
+
+
    public static List<Pair> wordCountEngine(String doc){
-      Map<String, Integer> wordCounter = new HashMap<String, Integer>();
-      
-      doc = doc.replaceAll("[!?,]", "");
-      String[] words = doc.split("\\W+");
-      
-      for(int i = 0; i < words.length; i++){
-         if(wordCounter.containsKey(words[i])){
-            wordCounter.put(words[i], wordCounter.get(words[i]) + 1);
+      Map<String, Integer> map = new HashMap<String, Integer>();
+
+      doc = doc.replaceAll("[,!?.]", "");
+      String[] words = doc.split("\\s+");
+      for(String word : words){
+         if(map.containsKey(word)){
+            map.put(word, map.get(word) + 1);
          }
          else{
-            wordCounter.put(words[i], 1);
+            map.put(word, 1);
          }
       }
-      
-      Map<String, Integer> treeMap = new TreeMap<String, Integer>(Collections.reverseOrder());
-      treeMap.putAll(wordCounter);
-      
-      List<Pair> sortedWordCounter = new ArrayList<Pair>();
-      for(Map.Entry<String, Integer> entry: treeMap.entrySet()){
-         Pair data = new Pair(entry.getKey(), entry.getValue());
-         sortedWordCounter.add(data);
+
+      List<Pair> orderedWords = new ArrayList<Pair>();
+      TreeMap<String, Integer> tmap = new TreeMap<String, Integer>(Collections.reverseOrder());
+      tmap.putAll(map);
+
+      for(Map.Entry<String, Integer> entry: tmap.entrySet()){
+         Pair pair = new Pair(entry.getKey(), entry.getValue());
+         orderedWords.add(pair);
       }
-      
-      return sortedWordCounter;
+
+      return orderedWords;
    }
-   
-   public static class Pair {
-      private String word;
-      private Integer count;
-      
+
+   public static class Pair{
+      String word;
+      Integer count;
+
       public Pair(String word, Integer count){
          this.word = word;
          this.count = count;
       }
    }
-   
-   public static void main(String[] args) {
-      String pramp = "Practice Makes Perfect";
-      System.out.println(pramp);
+
+   public static void main(String[] args){
+      String words = "practice makes perfect. get perfect by practice. just practice!";
+      List<Pair> result = wordCountEngine(words);
+      for(Pair data : result){
+         System.out.println(data.word + ": " + data.count);
+      }
    }
-   
 }
-
-
-//Time complexity O(n + m log m)
-//Space complexity O(n + m) // m stands for unique items in the words
