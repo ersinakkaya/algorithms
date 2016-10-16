@@ -17,32 +17,43 @@ public class HighestProductOfThree {
 		return highest;
 	}
 	
-	public static int highestProduct2(int[] arr){
-		if(arr.length < 3){
-			throw new IllegalArgumentException("Array cannot be less than 3 items");
-		}
-		int highestProductOfThree = 1;
-		int highestProductOf2 = 1;
-		int highest = 1;
-		int lowestProductOf2 = 1;
-		int lowest = 1;
-		for(int i = 0; i < arr.length; i++){
-			highest= Math.max(arr[i], highest);
-			lowest = Math.min(arr[i], lowest);
-			highestProductOf2 = Math.max(highest * arr[i], highestProductOf2);
-			lowestProductOf2 = Math.min(lowestProductOf2 * arr[i], lowestProductOf2);
-			if(highestProductOf2 > lowestProductOf2){
-				highestProductOfThree = Math.max(highestProductOf2 * arr[i], highestProductOfThree);
-			}
-			else{
-				highestProductOfThree = Math.max(lowestProductOf2 * arr[i], highestProductOfThree);
-			}
-		}
-		
+	public static int highestProductOfThree(int[] arr){
+		if (arrayOfInts.length < 3) {
+	        throw new IllegalArgumentException("Less than 3 items!");
+	    }
+
+	    int highest = Math.max(arrayOfInts[0], arrayOfInts[1]);
+	    int lowest  = Math.min(arrayOfInts[0], arrayOfInts[1]);
+	    int highestProductOfTwo = arrayOfInts[0] * arrayOfInts[1];
+	    int lowestProductOf2  = arrayOfInts[0] * arrayOfInts[1];
+	    int highestProductOfThree = arrayOfInts[0] * arrayOfInts[1] * arrayOfInts[2];
+
+	    for (int i = 2; i < arrayOfInts.length; i++) {
+	        int current = arrayOfInts[i];
+	        highestProductOfThree = Math.max(
+	        						Math.max(highestProductOfThree, current * highestProductOfTwo),
+	        						current * lowestProductOf2
+	        					);
+
+	        highestProductOfTwo = Math.max(
+	        						Math.max(highestProductOfTwo, current * highest),
+	        						current * lowest
+	        					);
+
+	        lowestProductOf2 = Math.min(
+	        						lowestProductOf2,
+	        						current * lowest
+	        					);
+
+	        highest = Math.max(highest, current);
+	        lowest = Math.min(lowest, current);
+	    }
+
 		return highestProductOfThree;
 	}
+	
 	public static void main(String[] args){
 		int[] data = {-10, -1, 3, 2, -10};
-		System.out.println(highestProduct(data));
+		System.out.println(highestProductOfThree(data));
 	}
 }
