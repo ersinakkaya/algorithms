@@ -17,27 +17,31 @@ import java.util.*;
  */
 
 /*
-  matrix[0][0]
-  matrix[0][1]
-  
   i=0
-  matrix[0][0]
+  j=0
+  matrix[0][0] -> 1
   
   i=1
-  
-  matrix[1][0]
-  matrix[0][1]
+  j=0
+  matrix[1][0] -> 4
+  matrix[0][1] -> 2
   
   i=2;
+  j=0;
+  matrix[2][0] -> 7
+  matrix[1][1] -> 5
+  matrix[0][2] -> 3
   
-  matrix[2][0]
-  matrix[1][1]
-  matrix[0][2]
-  
-  i=3;
-  matrix[3][0]
-  matrix[2][1]
-  matrix[1][2]
+  i=2;
+  j=1;
+  matrix[2][1]; -> 8
+  matrix[1][2]; -> 6
+
+  i=2;
+  j=2;
+  matrix[2][2] -> 9
+
+
   
   
   
@@ -70,7 +74,7 @@ class Solution {
         if(i == height - 1){
           j++;
         } else {
-          i++;
+          i++;  
         }
     }
     
