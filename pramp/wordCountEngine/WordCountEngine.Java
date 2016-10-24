@@ -1,11 +1,9 @@
-package Test;
-
+package com.pramp.interviews;
 import java.util.*;
 
-public class Test{
+public class WordCountEngine{
 
-
-   public static List<Pair> wordCountEngine(String doc){
+   public static List<Pair> countEngine(String doc){
       Map<String, Integer> map = new HashMap<String, Integer>();
 
       doc = doc.replaceAll("[,!?.]", "");
@@ -43,7 +41,7 @@ public class Test{
 
    public static void main(String[] args){
       String words = "practice makes perfect. get perfect by practice. just practice!";
-      List<Pair> result = wordCountEngine(words);
+      List<Pair> result = countEngine(words);
       for(Pair data : result){
          System.out.println(data.word + ": " + data.count);
       }

@@ -1,3 +1,4 @@
+package com.pramp.interviews;
 import java.util.*;
 
 class FindTheDuplicates {
